@@ -1,0 +1,11 @@
+enum Category {
+  ROMANCE,
+  ACTION,
+  HORROR,
+  SCIFI,
+  COMEDY,
+  DRAMA,
+  THRILLER,
+  FANTASY,
+  RELIGIOUS
+}
