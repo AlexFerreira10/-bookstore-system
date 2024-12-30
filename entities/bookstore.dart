@@ -1,5 +1,5 @@
 import 'book.dart';
-import 'contact.dart';
+import '../utils/contact.dart';
 
 class Bookstore with Contact {
   String name;
@@ -10,6 +10,10 @@ class Bookstore with Contact {
   void addBook(Book book) {
     books.add(book);
   }
+
+  String get getName => this.name;
+
+  set setName(String name) => this.name = name;
 
   void buyBook(String title) {
     var book = books.firstWhere((element) => element.title == title);
