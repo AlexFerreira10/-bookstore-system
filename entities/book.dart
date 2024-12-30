@@ -8,15 +8,13 @@ class Book {
   int _inStock;
   String? _award;
   Category _category;
-
-  // Business rule: Follow the pattern 20OFF, 30OFF, 40OFF, 50OFF
-  late String cupom;
+  // late String cupom; // Declarado com late para inicialização futura
+  String cupom = '';
 
   Book(this._title, this._author, this._description, this._price, this._inStock,
       this._category,
       [this._award]);
 
-  // Set Cuppom
   void addCupom(String cupom) {
     this.cupom = cupom;
     _applyDiscount();
@@ -60,6 +58,6 @@ class Book {
 
   @override
   String toString() {
-    return 'Book{_title: $_title, _author: $_author, _description: $_description, _price: $_price, _inStock: $_inStock, _award: $_award, _category: $_category}';
+    return 'Book{_title: $_title, _author: $_author, _description: $_description, _price: $_price, _inStock: $_inStock, _award: $_award, _category: $_category, cupom: $cupom}';
   }
 }

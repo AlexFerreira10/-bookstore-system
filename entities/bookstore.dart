@@ -25,6 +25,10 @@ class Bookstore with Contact {
     }
   }
 
+  Book getBook(String title) {
+    return books.firstWhere((element) => element.title == title);
+  }
+
   void findBook(String title) {
     var book = books.firstWhere((element) => element.title == title);
     print('Title: ${book.title}');
@@ -34,11 +38,11 @@ class Bookstore with Contact {
     print('In Stock: ${book.inStock}');
     print('Category: ${book.category}');
     print('Award: ${book.award}');
-    print('Cupom: ${book.getCupom}');
   }
 
   void showBooks() {
     for (var book in books) {
+      print('----------------------');
       print('Title: ${book.title}');
       print('Author: ${book.author}');
       print('Description: ${book.description}');
@@ -49,5 +53,10 @@ class Bookstore with Contact {
       print('Cupom: ${book.getCupom}');
       print('----------------------');
     }
+  }
+
+  @override
+  String toString() {
+    return 'Bookstore: $name, Address: ${getAddress}, Email: ${getEmail}, Phone: ${getTell}';
   }
 }

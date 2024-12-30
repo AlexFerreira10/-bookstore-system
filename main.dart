@@ -41,36 +41,23 @@ void main() {
         addBook(bookstore);
         break;
       case 3: // Consultar Livro
-        stdout.write('Digite o título do Livro: ');
-        var title = stdin.readLineSync()?.trim();
-        while (title == null || title.isEmpty) {
-          stdout.write('Título inválido. Digite novamente: ');
-          title = stdin.readLineSync()?.trim();
-        }
-        bookstore.findBook(title);
+        consultBook(bookstore);
+        toContiue();
         break;
       case 4: // Listar Livros
         bookstore.showBooks();
+        toContiue();
         break;
       case 5: // Vender Livro
-        stdout.write('Digite o título do Livro: ');
-        var title = stdin.readLineSync()?.trim();
-        while (title == null || title.isEmpty) {
-          stdout.write('Título inválido. Digite novamente: ');
-          title = stdin.readLineSync()?.trim();
-        }
-        bookstore.buyBook(title);
+        sellBook(bookstore);
         break;
       case 6: // Adicionar cupom de Desconto no Livro
-        stdout.write('Digite o título do Livro: ');
-        var title = stdin.readLineSync()?.trim();
-        while (title == null || title.isNotEmpty == false) {
-          stdout.write('Título inválido. Digite novamente: ');
-          title = stdin.readLineSync()?.trim();
-        }
-        stdout.write('Digite o cupom de desconto: ');
-        var cupom = stdin.readLineSync()?.trim();
-        // TODO: Implementação de cupom
+        addCupom(bookstore);
+        clearConsole();
+        break;
+      case 7: // Checar dados da loja
+        print(bookstore);
+        toContiue();
         break;
       default:
         print('Opção inválida!');
@@ -90,6 +77,7 @@ String menu(Bookstore bookstore) {
   menuBuffer.writeln('4 - Listar Livros');
   menuBuffer.writeln('5 - Vender Livro');
   menuBuffer.writeln('6 - Adicionar cupom de Desconto no Livro');
+  menuBuffer.writeln('7 - Checar dados da loja.');
   menuBuffer.write('Digite uma opção: ');
 
   return menuBuffer.toString();
@@ -204,4 +192,52 @@ void addBook(Bookstore bookstore) {
   print('Livro adicionado com sucesso: $book');
   sleep(Duration(seconds: 3));
   clearConsole();
+}
+
+void addCupom(Bookstore bookstore) {
+  stdout.write('Digite o título do Livro: ');
+  var title = stdin.readLineSync()?.trim();
+
+  while (title == null || title.isNotEmpty == false) {
+    stdout.write('Título inválido. Digite novamente: ');
+    title = stdin.readLineSync()?.trim();
+  }
+
+  var book = bookstore.getBook(title);
+
+  stdout.write(
+      'Digite o cupom de desconto: (10OFF, 20OFF, 30OFF, 40OFF, 50OFF) - ');
+  var cupom = stdin.readLineSync()?.trim();
+  book.addCupom(cupom!);
+  clearConsole();
+}
+
+void toContiue() {
+  stdout.write('Digite enter para continuar...');
+  stdin.readLineSync();
+  clearConsole();
+}
+
+void sellBook(Bookstore bookstore) {
+  stdout.write('Digite o título do Livro: ');
+  var title = stdin.readLineSync()?.trim();
+
+  while (title == null || title.isEmpty) {
+    stdout.write('Título inválido. Digite novamente: ');
+    title = stdin.readLineSync()?.trim();
+  }
+
+  bookstore.buyBook(title);
+}
+
+void consultBook(Bookstore bookstore) {
+  stdout.write('Digite o título do Livro: ');
+  var title = stdin.readLineSync()?.trim();
+
+  while (title == null || title.isEmpty) {
+    stdout.write('Título inválido. Digite novamente: ');
+    title = stdin.readLineSync()?.trim();
+  }
+
+  bookstore.findBook(title);
 }
